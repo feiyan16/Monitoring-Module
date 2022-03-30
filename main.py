@@ -11,19 +11,23 @@ DEBUG = True
 
 def main():
     # Create a listener for new connections on the specified socket
-    sio = socketio.Server()
-    app = socketio.WSGIApp(sio)
-    eventlet.wsgi.server(eventlet.listen((ADDRESS, PORT)), app)
+    sio = socketio.Server(logger=True, cors_allowed_origins='http://localhost:3000')
 
     # Define function to be called when there is a start message
     @sio.on('start')
-    def start_monitor_thread(data):
+    def start_monitor_thread(sid, data):
+        if DEBUG:
+            print('sid:', sid)
+            print('data:' + str(data))
         stream_thread = Thread(target=monitor_stream, args=(sio, data))
         stream_thread.daemon = True
         stream_thread.start()
 
     if DEBUG:
         print("Listening to " + str(ADDRESS) + " on port " + str(PORT) + "\n")
+
+    app = socketio.WSGIApp(sio)
+    eventlet.wsgi.server(eventlet.listen(('localhost', PORT)), app)
 
 
 def monitor_stream(sio, port):
@@ -42,24 +46,24 @@ def monitor_stream(sio, port):
         if DEBUG:
             print("Sending to " + str(ADDRESS) + " on port " + str(PORT) + ":\n" + str(new_msg) + "\n")
         new_msg = bytes(new_msg, 'utf-8')
-        sio.emit(new_msg)
+        sio.emit(port_number, new_msg)
 
 
-# driving function to process data throughput of a specificed port/interface.
+# driving function to process data throughput of a specified port/interface.
 # Port: Port used to filter packets received from the interface
 def process_packets(port):
-    filter = 'port ' + port
-    capture = pyshark.LiveCapture(interface='lo', bpf_filter=filter)
+    packet_filter = 'port ' + port
+    capture = pyshark.LiveCapture(interface='lo', bpf_filter=packet_filter)
 
     capture.sniff(timeout=2)
-    dataReceived = 0
+    data_received = 0
     print(capture)
     if len(capture) == 0:
         return 0
 
     for i in range(0, len(capture)):
-        dataReceived = dataReceived + int(capture[i].length)
-    return dataReceived
+        data_received = data_received + int(capture[i].length)
+    return data_received
 
 
 main()
