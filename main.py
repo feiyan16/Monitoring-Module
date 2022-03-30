@@ -2,6 +2,7 @@ from threading import Thread
 import socketio
 import json
 import pyshark
+import eventlet
 
 ADDRESS = "localhost"
 PORT = 5555
@@ -10,7 +11,9 @@ DEBUG = True
 
 def main():
     # Create a listener for new connections on the specified socket
-    sio = socketio.Client()
+    sio = socketio.Server()
+    app = socketio.WSGIApp(sio)
+    eventlet.wsgi.server(eventlet.listen((ADDRESS, PORT)), app)
 
     # Define function to be called when there is a start message
     @sio.on('start')
@@ -19,7 +22,6 @@ def main():
         stream_thread.daemon = True
         stream_thread.start()
 
-    sio.connect("http://"+ADDRESS+":"+PORT)
     if DEBUG:
         print("Listening to " + str(ADDRESS) + " on port " + str(PORT) + "\n")
 
