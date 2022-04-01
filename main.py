@@ -8,6 +8,7 @@ ADDRESS = "localhost"
 PORT = 5555
 DEBUG = True
 
+eventlet.monkey_patch()
 
 def main():
     # Create a listener for new connections on the specified socket
@@ -42,10 +43,8 @@ def monitor_stream(sio, port):
             "metrics": metrics,
             "stream_id": port_number
         }
-        new_msg = json.dumps(new_msg)
         if DEBUG:
             print("Sending to " + str(ADDRESS) + " on port " + str(PORT) + ":\n" + str(new_msg) + "\n")
-        new_msg = bytes(new_msg, 'utf-8')
         sio.emit(port_number, new_msg)
 
 
