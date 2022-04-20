@@ -15,9 +15,9 @@
 ## Run
 ### Flask
 1. cd into the directory containing main.py 
-2. [WINDOWS] Type the command: ```py main.py``` and press [ENTER]
+2. [WINDOWS] Type the command: ```py python3 main.py``` and press [ENTER]
 ###### OR
-2. [LINUX] Type the command: ```sudo main.py``` and press [ENTER]
+2. [LINUX] Type the command: ```sudo python3 main.py``` and press [ENTER]
 
 ### Gunicorn/Waitress
 1. cd into the directory containing app.py
