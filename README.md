@@ -20,17 +20,13 @@
 
 ### Run
 #### Flask
-##### [WINDOWS]
 1. cd into the directory containing main.py 
-2. Type the command: ```py main.py``` and press [ENTER]
-##### [LINUX]
-1. cd into the directory containing main.py
-2. Type the command: ```sudo main.py``` and press [ENTER]
+2. [WINDOWS] Type the command: ```py main.py``` and press [ENTER]
+##### OR
+2. [LINUX] Type the command: ```sudo main.py``` and press [ENTER]
 
 #### Gunicorn/Waitress
-##### [WINDOWS]
 1. cd into the directory containing app.py
-2. Type the command ```waitress-serve --threads=50 --listen=127.0.0.1:5555 app:app```
-##### [LINUX]
-1. cd into the directory containing app.py
-2. Type the command ```sudo gunicorn --threads 50 -b '127.0.0.1:5555' app:app```
+2. [WINDOWS] Type the command ```waitress-serve --threads=50 --listen=127.0.0.1:5555 app:app```
+##### OR
+2. [LINUX] Type the command ```sudo gunicorn --threads 50 -b '127.0.0.1:5555' app:app```
