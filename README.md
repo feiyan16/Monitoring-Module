@@ -1,16 +1,16 @@
 # Monitoring-Module
 ## Setup
 ### Flask
-1. Install flask: ```pip install flask```
-2. Install socketio: ```pip install python-socketio```
-3. Install scapy: ```pip install scapy```
+1. Install flask: ```sudo pip install flask```
+2. Install socketio: ```sudo pip install python-socketio```
+3. Install scapy: ```sudo pip install scapy```
 
 ### Gunicorn/Waitress
 1. [WINDOWS] Install waitress: ```pip install waitress```
 ###### OR
-1. [LINUX] Install gunicorn ```pip install gunicorn```
-2. Install socketio: ```pip install python-socketio```
-3. Install scapy: ```pip install scapy```
+1. [LINUX] Install gunicorn ```sudo pip install gunicorn```
+2. Install socketio: ```sudo pip install python-socketio```
+3. Install scapy: ```sudo pip install scapy```
 
 ## Run
 ### Flask
