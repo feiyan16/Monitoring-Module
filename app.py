@@ -1,5 +1,5 @@
 import socketio
-import pyshark
+from scapy.all import *
 
 ADDRESS = "localhost"
 PORT = 5555
@@ -78,14 +78,12 @@ if DEBUG:
 # Port: Port used to filter packets received from the interface
 def process_packets(port):
     packet_filter = 'port ' + port
-    capture = pyshark.LiveCapture(interface='lo', bpf_filter=packet_filter)
+    capture = sniff(iface='lo', filter=packet_filter, timeout=2)
 
-    capture.sniff(timeout=2)
     data_received = 0
-    print(capture)
     if len(capture) == 0:
         return 0
 
     for i in range(0, len(capture)):
-        data_received = data_received + int(capture[i].length)
+        data_received = data_received + len(capture[i])
     return data_received

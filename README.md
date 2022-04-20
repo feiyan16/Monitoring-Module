@@ -1,22 +1,16 @@
 # Monitoring-Module
 ## Setup
 ### Flask
-1. Install waitress: ```pip install flask```
+1. Install flask: ```pip install flask```
 2. Install socketio: ```pip install python-socketio```
-3. [WINDOWS] Install TShark from this website: https://www.wireshark.org/download.html
-###### OR
-3. [LINUX] Install TShark: ```sudo apt install tshark```
-4. Install PyShark: ```pip install pyshark```
+3. Install scapy: ```pip install scapy```
 
 ### Gunicorn/Waitress
 1. [WINDOWS] Install waitress: ```pip install waitress```
 ###### OR
 1. [LINUX] Install gunicorn ```pip install gunicorn```
 2. Install socketio: ```pip install python-socketio```
-3. [WINDOWS] Install TShark from this website: https://www.wireshark.org/download.html
-###### OR
-3. [LINUX] Install TShark: ```sudo apt install tshark```
-4. Install PyShark: ```pip install pyshark``
+3. Install scapy: ```pip install scapy```
 
 ## Run
 ### Flask

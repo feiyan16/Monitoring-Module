@@ -1,8 +1,6 @@
-import json
-from threading import Thread
 from flask import Flask
 import socketio
-import pyshark
+from scapy.all import *
 
 ADDRESS = "localhost"
 PORT = 5555
