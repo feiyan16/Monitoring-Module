@@ -89,7 +89,7 @@ def process_packets(port):
 
     for i in range(0, len(capture)):
         data_received = data_received + len(capture[i])
-    return data_received
+    return  { 'data_transfer_rate': data_received, 'packets_per_second': len(capture) }
 
 
 main()
