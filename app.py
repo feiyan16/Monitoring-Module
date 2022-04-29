@@ -1,5 +1,6 @@
 import socketio
 from scapy.all import *
+import platform
 
 ADDRESS = "localhost"
 PORT = 5555
@@ -77,8 +78,12 @@ if DEBUG:
 # driving function to process data throughput of a specified port/interface.
 # Port: Port used to filter packets received from the interface
 def process_packets(port):
-    packet_filter = 'port ' + port
-    capture = sniff(iface='lo', filter=packet_filter, timeout=2)
+    if platform.system() == 'Darwin': # MacOS fix
+        capture_all = sniff(iface = 'lo0', timeout=2)
+        capture = [ pkt for pkt in capture_all if pkt.haslayer(TCP) if pkt.sport == int(port)]
+    else: 
+        packet_filter = 'port ' + port
+        capture = sniff(iface='lo', filter=packet_filter, timeout=2)
 
     data_received = 0
     if len(capture) == 0:
